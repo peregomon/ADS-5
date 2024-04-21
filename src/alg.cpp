@@ -1,4 +1,6 @@
 // Copyright 2021 NNTU-CS
+#include <string>
+#include <map>
 #include "tstack.h"
 
 std::string infx2pstfx(std::string inf) {
@@ -11,25 +13,25 @@ std::string infx2pstfx(std::string inf) {
             res_str += inf[i];
             res_str += " ";
         } else if (inf[i] == '(') {
-            stack1.push(inf[i]);
+            stack1.Push(inf[i]);
         } else if (inf[i] == ')') {
-            while (!stack1.isEmpty() && stack1.Top() != '(') {
-                res_str += stack1.pop();
+            while (!stack1.IsEmpty() && stack1.Top() != '(') {
+                res_str += stack1.Pop();
                 res_str += " ";
             }
-            stack1.pop();
+            stack1.Pop();
         } else if (inf[i] == '+' || inf[i] == '-'
                    || inf[i] == '*' || inf[i] == '/') {
-            while ( !stack1.isEmpty()
+            while ( !stack1.IsEmpty()
                    && priority[inf[i]] <= priority[stack1.Top()]) {
-                res_str += stack1.pop();
+                res_str += stack1.Pop();
                 res_str += " ";
             }
-            stack1.push(inf[i]);
+            stack1.Push(inf[i]);
         }
     }
-    while (!stack1.isEmpty()) {
-        res_str += stack1.pop();
+    while (!stack1.IsEmpty()) {
+        res_str += stack1.Pop();
         res_str += " ";
     }
     res_str.erase(res_str.length() - 1);
@@ -40,19 +42,19 @@ int eval(std::string pref) {
     TStack<int, 100> stack2;
     for (int i = 0; i < pref.length(); i++) {
         if ('0' <= pref[i] && pref[i] <= '9') {
-            stack2.push(pref[i] - '0');
+            stack2.Push(pref[i] - '0');
         } else if (pref[i] == '+') {
-            stack2.push(stack2.pop() + stack2.pop());
+            stack2.Push(stack2.Pop() + stack2.Pop());
         } else if (pref[i] == '-') {
-            int num2 = stack2.pop();
-            int num1 = stack2.pop();
-            stack2.push(num1 - num2);
+            int num2 = stack2.Pop();
+            int num1 = stack2.Pop();
+            stack2.Push(num1 - num2);
         } else if (pref[i] == '*') {
-            stack2.push(stack2.pop() * stack2.pop());
+            stack2.Push(stack2.Pop() * stack2.Pop());
         } else if (pref[i] == '/') {
-            int num2 = stack2.pop();
-            int num1 = stack2.pop();
-            stack2.push(num1 / num2);
+            int num2 = stack2.Pop();
+            int num1 = stack2.Pop();
+            stack2.Push(num1 / num2);
         }
     }
     return stack2.Top();
