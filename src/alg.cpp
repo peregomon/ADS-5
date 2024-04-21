@@ -1,3 +1,4 @@
+// Copyright 2021 NNTU-CS
 #include "tstack.h"
 
 std::string infx2pstfx(std::string inf) {
