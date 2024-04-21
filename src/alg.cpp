@@ -13,7 +13,7 @@ std::string infx2pstfx(std::string inf) {
             stack1.push(inf[i]);
         } else if (inf[i] == ')') {
             while (!stack1.isEmpty() && stack1.top() != '(') {
-                res_str += stack1.Pop();
+                res_str += stack1.pop();
                 res_str += " ";
             }
             stack1.pop();
