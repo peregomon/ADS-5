@@ -11,7 +11,7 @@ class TStack {
 
  public:
     TStack() : top(-1), stack(new T(size)) {}
-    char Top(void) {
+    char top(void) {
         if (IsEmpty()) throw std::string("Stack is EMPTY!");
         else
             return stack[top];
