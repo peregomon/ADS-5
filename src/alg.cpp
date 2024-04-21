@@ -13,7 +13,7 @@ std::string infx2pstfx(std::string inf) {
         } else if (inf[i] == '(') {
             stack1.push(inf[i]);
         } else if (inf[i] == ')') {
-            while (!stack1.isEmpty() && stack1.top() != '(') {
+            while (!stack1.isEmpty() && stack1.Top() != '(') {
                 res_str += stack1.pop();
                 res_str += " ";
             }
@@ -21,7 +21,7 @@ std::string infx2pstfx(std::string inf) {
         } else if (inf[i] == '+' || inf[i] == '-'
                    || inf[i] == '*' || inf[i] == '/') {
             while ( !stack1.isEmpty()
-                   && priority[inf[i]] <= priority[stack1.top()]) {
+                   && priority[inf[i]] <= priority[stack1.Top()]) {
                 res_str += stack1.pop();
                 res_str += " ";
             }
@@ -55,5 +55,5 @@ int eval(std::string pref) {
             stack2.push(num1 / num2);
         }
     }
-    return stack2.top();
+    return stack2.Top();
 }
